@@ -1,0 +1,2815 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commandes Windows - Base de Connaissances Complète</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        /* === COULEURS EXACTES === */
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --bg-color: #ecf0f1;
+            --card-color: #ffffff;
+            --text-color: #2c3e50;
+            --text-light: #7f8c8d;
+            --border-color: #bdc3c7;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --danger-color: #e74c3c;
+            --sidebar-width: 280px;
+            --border-radius: 8px;
+            --shadow: 0 2px 5px rgba(0,0,0,0.1);
+            --shadow-lg: 0 5px 15px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* === LAYOUT === */
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* === SIDEBAR === */
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--card-color);
+            border-right: 1px solid var(--border-color);
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo-icon {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .logo h1 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-color);
+        }
+
+        .logo span {
+            color: var(--secondary-color);
+        }
+
+        .search-box {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 15px 12px 45px;
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-color);
+            font-size: 0.9rem;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+        }
+
+        .nav-title {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-light);
+            margin: 20px 0 10px;
+            font-weight: 600;
+        }
+
+        .nav-links {
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-bottom: 5px;
+        }
+
+        .nav-links a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 15px;
+            border-radius: var(--border-radius);
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            background-color: rgba(52, 152, 219, 0.1);
+            color: var(--secondary-color);
+        }
+
+        .back-to-main {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .back-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 10px 15px;
+            background-color: rgba(52, 152, 219, 0.1);
+            border-radius: var(--border-radius);
+        }
+
+        /* === MAIN CONTENT === */
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            padding: 20px;
+        }
+
+        /* === HEADER === */
+        .header {
+            background-color: var(--card-color);
+            padding: 25px;
+            border-radius: var(--border-radius);
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            color: var(--text-light);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: var(--border-radius);
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(52, 152, 219, 0.1);
+            color: var(--secondary-color);
+        }
+
+        .btn-primary {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+
+        /* === SECTIONS === */
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(52, 152, 219, 0.2);
+        }
+
+        .section-header h2 {
+            font-size: 1.4rem;
+            color: var(--primary-color);
+        }
+
+        .section-tag {
+            background-color: rgba(52, 152, 219, 0.1);
+            color: var(--secondary-color);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: auto;
+        }
+
+        /* === CATEGORIES PLIABLES === */
+        .category {
+            background-color: var(--card-color);
+            border-radius: var(--border-radius);
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+            border-left: 5px solid var(--secondary-color);
+            overflow: hidden;
+        }
+
+        .category-header {
+            padding: 18px 20px;
+            background-color: rgba(52, 152, 219, 0.05);
+            border-bottom: 1px solid var(--border-color);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .category-header:hover {
+            background-color: rgba(52, 152, 219, 0.1);
+        }
+
+        .category-header h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .category-header i {
+            color: var(--secondary-color);
+            transition: transform 0.3s ease;
+        }
+
+        .category-header i.rotated {
+            transform: rotate(180deg);
+        }
+
+        .category-content {
+            max-height: 5000px;
+            overflow: hidden;
+            transition: max-height 0.5s ease, opacity 0.3s ease;
+            opacity: 1;
+        }
+
+        .category-content.collapsed {
+            max-height: 0;
+            opacity: 0;
+        }
+
+        /* === COMMANDES === */
+        .command-item {
+            padding: 25px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .command-item:last-child {
+            border-bottom: none;
+        }
+
+        /* Métadonnées */
+        .command-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+        }
+
+        .risk-low {
+            color: var(--success-color);
+            font-weight: 600;
+            background-color: rgba(39, 174, 96, 0.1);
+            padding: 3px 10px;
+            border-radius: 20px;
+        }
+
+        .risk-medium {
+            color: var(--warning-color);
+            font-weight: 600;
+            background-color: rgba(243, 156, 18, 0.1);
+            padding: 3px 10px;
+            border-radius: 20px;
+        }
+
+        .risk-high {
+            color: var(--danger-color);
+            font-weight: 600;
+            background-color: rgba(231, 76, 60, 0.1);
+            padding: 3px 10px;
+            border-radius: 20px;
+        }
+
+        .category-tag {
+            background-color: rgba(52, 152, 219, 0.1);
+            color: var(--secondary-color);
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .time-tag {
+            background-color: rgba(155, 89, 182, 0.1);
+            color: #9b59b6;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        /* Code block */
+        .command-code {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin: 20px 0;
+            overflow-x: auto;
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .command-code .comment {
+            color: #95a5a6;
+            font-style: italic;
+        }
+
+        .command-code .cmd {
+            color: #3498db;
+            font-weight: 500;
+        }
+
+        /* Notes */
+        .command-notes {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .note {
+            margin-bottom: 15px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .note:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 6px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .note-when:before { background-color: var(--success-color); }
+        .note-warning:before { background-color: var(--warning-color); }
+        .note-test:before { background-color: var(--secondary-color); }
+        .note-scenario:before { background-color: var(--accent-color); }
+
+        .note-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Structure AD */
+        .ad-structure {
+            background-color: #f8f9fa;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            margin: 20px 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            line-height: 1.8;
+            overflow-x: auto;
+        }
+
+        .ad-item {
+            margin-left: 20px;
+            position: relative;
+        }
+
+        .ad-item:before {
+            content: "├── ";
+            position: absolute;
+            left: -20px;
+            color: var(--text-light);
+        }
+
+        .ad-item.last:before {
+            content: "└── ";
+        }
+
+        .ad-comment {
+            color: var(--text-light);
+            font-style: italic;
+            margin-left: 10px;
+        }
+
+        /* === FOOTER === */
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--text-light);
+            border-top: 1px solid var(--border-color);
+            margin-top: 40px;
+        }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 768px) {
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .container {
+                flex-direction: column;
+            }
+            
+            .header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .header-actions {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- SIDEBAR -->
+        <nav class="sidebar">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fab fa-windows"></i>
+                </div>
+                <div>
+                    <h1>Commandes <span>Windows</span></h1>
+                    <small style="color: var(--text-light); font-size: 0.8rem;">Base de connaissances complète</small>
+                </div>
+            </div>
+
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Rechercher...">
+            </div>
+
+            <div class="nav-title">Navigation</div>
+            <ul class="nav-links">
+                <li><a href="#server" class="active"><i class="fas fa-server"></i> Windows Server</a></li>
+                <li><a href="#powershell"><i class="fas fa-terminal"></i> PowerShell</a></li>
+                <li><a href="#network"><i class="fas fa-network-wired"></i> Réseau & Pare-feu</a></li>
+                <li><a href="#ad"><i class="fas fa-users-cog"></i> Active Directory</a></li>
+                <li><a href="#dhcp-dns"><i class="fas fa-dharmachakra"></i> DHCP & DNS</a></li>
+                <li><a href="#file"><i class="fas fa-folder"></i> Fichiers & Partages</a></li>
+                <li><a href="#gpo"><i class="fas fa-sliders-h"></i> GPO & Stratégies</a></li>
+                <li><a href="#services"><i class="fas fa-cogs"></i> Services & Rôles</a></li>
+                <li><a href="#remote"><i class="fas fa-laptop-house"></i> Administration à distance</a></li>
+                <li><a href="#utils"><i class="fas fa-tools"></i> Utilitaires</a></li>
+                <li><a href="#scripts"><i class="fas fa-code"></i> Scripts Complets</a></li>
+            </ul>
+
+            <div class="back-to-main">
+                <a href="https://sugira-yannick.github.io/Divers-Commandes-Importantes/" class="back-link" target="_blank">
+                    <i class="fas fa-arrow-left"></i>
+                    Retour au site principal
+                </a>
+            </div>
+        </nav>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <!-- HEADER -->
+            <header class="header">
+                <div>
+                    <h1>Commandes Windows Server & PowerShell Complètes</h1>
+                    <p>Collection exhaustive de commandes pour l'administration Windows - TP AFCI</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-outline" id="expandAllBtn">
+                        <i class="fas fa-expand-alt"></i> Tout déplier
+                    </button>
+                    <button class="btn btn-outline" id="collapseAllBtn">
+                        <i class="fas fa-compress-alt"></i> Tout replier
+                    </button>
+                    <button class="btn btn-primary" onclick="window.print()">
+                        <i class="fas fa-print"></i> Imprimer
+                    </button>
+                </div>
+            </header>
+
+            <!-- SECTION WINDOWS SERVER -->
+            <section id="server" class="section">
+                <div class="section-header">
+                    <h2><i class="fas fa-server"></i> Windows Server</h2>
+                    <span class="section-tag">Administration</span>
+                </div>
+
+                <!-- Catégorie : Configuration Serveur -->
+                <div class="category">
+                    <div class="category-header" onclick="toggleCategory(this)">
+                        <h3><i class="fas fa-cog"></i> Configuration Serveur</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="category-content">
+                        <!-- COMMANDE 1 -->
+                        <div class="command-item">
+                            <div class="command-meta">
+                                <span class="risk-medium">RISQUE MOYEN</span>
+                                <span class="category-tag">CONFIGURATION</span>
+                                <span class="time-tag">⏱️ 30 secondes</span>
+                            </div>
+                            
+                            <h3>Renommer un serveur Windows</h3>
+                            
+                            <pre class="command-code"># Renommer un serveur et redémarrer
+Rename-Computer -NewName "[NOM_SERVEUR]" -Force -Restart
+
+# Renommer sans redémarrer
+Rename-Computer -NewName "[NOM_SERVEUR]" -Force</pre>
+                            
+                            <div class="command-notes">
+                                <div class="note note-when">
+                                    <div class="note-title">🎯 Quand utiliser</div>
+                                    <p>Renommage d'un serveur après l'installation ou lors d'une restructuration</p>
+                                </div>
+                                <div class="note note-warning">
+                                    <div class="note-title">⚠️ Attention</div>
+                                    <p>Le renommage nécessite un redémarrage pour être effectif</p>
+                                </div>
+                                <div class="note note-test">
+                                    <div class="note-title">✅ Test de succès</div>
+                                    <p>Commande `hostname` affiche le nouveau nom</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- COMMANDE 2 -->
+                        <div class="command-item">
+                            <div class="command-meta">
+                                <span class="risk-low">RISQUE FAIBLE</span>
+                                <span class="category-tag">RÉSEAU</span>
+                                <span class="time-tag">⏱️ 15 secondes</span>
+                            </div>
+                            
+                            <h3>Configurer une adresse IP statique</h3>
+                            
+                            <pre class="command-code"># Configurer une IP statique
+New-NetIPAddress -InterfaceIndex [ID_INTERFACE] `
+    -IPAddress [ADRESSE_IP] `
+    -PrefixLength [MASQUE] `
+    -DefaultGateway [PASSERELLE]
+
+# Exemple concret
+New-NetIPAddress -InterfaceIndex 2 `
+    -IPAddress 192.168.1.10 `
+    -PrefixLength 24 `
+    -DefaultGateway 192.168.1.1</pre>
+                            
+                            <div class="command-notes">
+                                <div class="note note-when">
+                                    <div class="note-title">🎯 Quand utiliser</div>
+                                    <p>Configuration manuelle d'adresse IP pour les serveurs</p>
+                                </div>
+                                <div class="note note-warning">
+                                    <div class="note-title">⚠️ Attention</div>
+                                    <p>Vérifier que l'adresse IP n'est pas déjà utilisée</p>
+                                </div>
+                                <div class="note note-test">
+                                    <div class="note-title">✅ Test de succès</div>
+                                    <p>`ping [ADRESSE_IP]` fonctionne depuis un autre poste</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- COMMANDE 3 -->
+                        <div class="command-item">
+                            <div class="command-meta">
+                                <span class="risk-low">RISQUE FAIBLE</span>
+                                <span class="category-tag">RÉSEAU</span>
+                                <span class="time-tag">⏱️ 5 secondes</span>
+                            </div>
+                            
+                            <h3>Configurer interface réseau avec DHCP</h3>
+                            
+                            <pre class="command-code"># Activer DHCP sur une interface
+Set-NetIPInterface -InterfaceAlias "Ethernet" -Dhcp Enabled
+
+# Désactiver DHCP
+Set-NetIPInterface -InterfaceAlias "Ethernet" -Dhcp Disabled
+
+# Configurer DNS client
+Set-DnsClientServerAddress -InterfaceIndex 2 `
+    -ServerAddresses @("8.8.8.8", "8.8.4.4")</pre>
+                            
+                            <div class="command-notes">
+                                <div class="note note-when">
+                                    <div class="note-title">🎯 Quand utiliser</div>
+                                    <p>Configuration automatique d'adresse IP ou modification DNS</p>
+                                </div>
+                                <div class="note note-warning">
+                                    <div class="note-title">⚠️ Attention</div>
+                                    <p>DHCP peut attribuer une IP différente à chaque redémarrage</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Catégorie : Rôles & Fonctionnalités -->
+                <div class="category">
+                    <div class="category-header" onclick="toggleCategory(this)">
+                        <h3><i class="fas fa-layer-group"></i> Rôles & Fonctionnalités</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="category-content">
+                        <!-- COMMANDE 1 -->
+                        <div class="command-item">
+                            <div class="command-meta">
+                                <span class="risk-high">RISQUE ÉLEVÉ</span>
+                                <span class="category-tag">ACTIVE DIRECTORY</span>
+                                <span class="time-tag">⏱️ 10-30 minutes</span>
+                            </div>
+                            
+                            <h3>Installer AD Domain Services</h3>
+                            
+                            <pre class="command-code"># Installer AD DS avec les outils
+Install-WindowsFeature AD-Domain-Services -IncludeManagementTools
+
+# Promouvoir en contrôleur de domaine
+Install-ADDSForest -DomainName "[NOM_DOMAINE]" `
+    -DomainNetbiosName "[NETBIOS_NAME]" `
+    -InstallDNS `
+    -Force</pre>
+                            
+                            <div class="command-notes">
+                                <div class="note note-when">
+                                    <div class="note-title">🎯 Quand utiliser</div>
+                                    <p>Création d'un nouveau domaine Active Directory</p>
+                                </div>
+                                <div class="note note-warning">
+                                    <div class="note-title">⚠️ Attention</div>
+                                    <p>Opération irréversible, redémarrage requis</p>
+                                </div>
+                                <div class="note note-test">
+                                    <div class="note-title">✅ Test de succès</div>
+                                    <p>`Get-ADDomain` retourne les informations du domaine</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- COMMANDE 2 -->
+                        <div class="command-item">
+                            <div class="command-meta">
+                                <span class="risk-medium">RISQUE MOYEN</span>
+                                <span class="category-tag">SERVEUR FICHIERS</span>
+                                <span class="time-tag">⏱️ 2 minutes</span>
+                            </div>
+                            
+                            <h3>Installer Serveur de Fichiers</h3>
+                            
+                            <pre class="command-code"># Installer le rôle Serveur de Fichiers
+Install-WindowsFeature FS-FileServer -IncludeManagementTools
+
+# Vérifier l'installation
+Get-WindowsFeature FS-FileServer | Select-Object Name, Installed</pre>
+                            
+                            <div class="command-notes">
+                                <div class="note note-when">
+                                    <div class="note-title">🎯 Quand utiliser</div>
+                                    <p>Création d'un serveur de fichiers pour partages réseau</p>
+                                </div>
+                                <div class="note note-test">
+                                    <div class="note-title">✅ Test de succès</div>
+                                    <p>La fonctionnalité apparaît comme installée</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION POWERSHELL -->
+            <section id="powershell" class="section">
+                <div class="section-header">
+                    <h2><i class="fas fa-terminal"></i> PowerShell</h2>
+                    <span class="section-tag">Scripting</span>
+                </div>
+
+                <!-- Catégorie : Configuration Réseau -->
+                <div class="category">
+                    <div class="category-header" onclick="toggleCategory(this)">
+                        <h3><i class="fas fa-wifi"></i> Configuration Réseau</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="category-content">
+                        <!-- COMMANDE 1 -->
+                        <div class="command-item">
+                            <div class="command-meta">
+                                <span class="risk-low">RISQUE FAIBLE</span>
+                                <span class="category-tag">DIAGNOSTIC</span>
+                                <span class="time-tag">⏱️ 2 secondes</span>
+                            </div>
+                            
+                            <h3>Lister les interfaces réseau</h3>
+                            
+                            <pre class="command-code"># Lister toutes les interfaces
+Get-NetAdapter
+
+# Voir la configuration complète
+Get-NetIPConfiguration
+
+# Adresses IP détaillées
+Get-NetIPAddress -AddressFamily IPv4 | Sort-Object InterfaceIndex</pre>
+                            
+                            <div class="command-notes">
+                                <div class="note note-when">
+                                    <div class="note-title">🎯 Quand utiliser</div>
+                                    <p>Vérification de la configuration réseau</p>
+                                </div>
+                                <div class="note note-warning">
+                                    <div class="note-title">⚠️ Attention</div>
+                                    <p>Certaines interfaces peuvent être virtuelles</p>
+                                </div>
+                                <div class="note note-test">
+                                    <div class="note-title">✅ Test de succès</div>
+                                    <p>Affichage cohérent des interfaces actives</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- COMMANDE 2 -->
+                        <div class="command-item">
+                            <div class="command-meta">
+                                <span class="risk-low">RISQUE FAIBLE</span>
+                                <span class="category-tag">DIAGNOSTIC</span>
+                                <span class="time-tag">⏱️ 5 secondes</span>
+                            </div>
+                            
+                            <h3>Gestion avancée des adresses IP</h3>
+                            
+                            <pre class="command-code"># Supprimer une adresse IP existante
+Get-NetIPAddress -InterfaceAlias "Ethernet 2" | Remove-NetIPAddress -Confirm:$false
+
+# Ajouter une nouvelle adresse IP
+New-NetIPAddress -InterfaceAlias "Ethernet 2" -IPAddress 172.16.2.1 -PrefixLength 28
+
+# Vérifier les configurations IP
+Get-NetIPConfiguration | Select-Object InterfaceAlias, InterfaceIndex, IPv4Address</pre>
+                            
+                            <div class="command-notes">
+                                <div class="note note-when">
+                                    <div class="note-title">🎯 Quand utiliser</div>
+                                    <p>Modification ou correction de configuration IP</p>
+                                </div>
+                                <div class="note note-warning">
+                                    <div class="note-title">⚠️ Attention</div>
+                                    <p>La suppression d'adresse IP peut couper la connectivité</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Catégorie : Gestion Système -->
+                <div class="category">
+                    <div class="category-header" onclick="toggleCategory(this)">
+                        <h3><i class="fas fa-desktop"></i> Gestion Système</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="category-content">
+                        <!-- COMMANDE 1 -->
+                        <div class="command-item">
+                            <div class="command-meta">
+                                <span class="risk-low">RISQUE FAIBLE</span>
+                                <span class="category-tag">SYSTÈME</span>
+                                <span class="time-tag">⏱️ 10 secondes</span>
+                            </div>
+                            
+                            <h3>Gestion des services Windows</h3>
+                            
+                            <pre class="command-code"># Démarrer un service
+Start-Service -Name "[NOM_SERVICE]"
+
+# Arrêter un service
+Stop-Service -Name "[NOM_SERVICE]" -Force
+
+# Configurer démarrage automatique
+Set-Service -Name "[NOM_SERVICE]" -StartupType Automatic
+
+# Voir services en cours
+Get-Service | Where-Object {$_.Status -eq "Running"} | Select-Object Name, DisplayName</pre>
+                            
+                            <div class="command-notes">
+                                <div class="note note-when">
+                                    <div class="note-title">🎯 Quand utiliser</div>
+                                    <p>Maintenance, redémarrage de services, configuration</p>
+                                </div>
+                                <div class="note note-warning">
+                                    <div class="note-title">⚠️ Attention</div>
+                                    <p>Certains services critiques ne doivent pas être arrêtés</p>
+                                </div>
+                                <div class="note note-scenario">
+                                    <div class="note-title">🚨 Scénario</div>
+                                    <p>Service qui ne démarre pas, service bloqué</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- COMMANDE 2 -->
+                        <div class="command-item">
+                            <div class="command-meta">
+                                <span class="risk-low">RISQUE FAIBLE</span>
+                                <span class="category-tag">SYSTÈME</span>
+                                <span class="time-tag">⏱️ 5 secondes</span>
+                            </div>
+                            
+                            <h3>Redémarrer un serveur</h3>
+                            
+                            <pre class="command-code"># Redémarrer immédiatement
+Restart-Computer -Force
+
+# Redémarrer avec délai (30 secondes)
+Restart-Computer -Delay 30 -Force
+
+# Redémarrer un ordinateur distant
+Restart-Computer -ComputerName "SRV-01" -Force</pre>
+                            
+                            <div class="command-notes">
+                                <div class="note note-when">
+                                    <div class="note-title">🎯 Quand utiliser</div>
+                                    <p>Application de mises à jour, résolution de problèmes</p>
+                                </div>
+                                <div class="note note-warning">
+                                    <div class="note-title">⚠️ Attention</div>
+                                    <p>Prévenir les utilisateurs avant redémarrage en production</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION RÉSEAU & PARE-FEU -->
+            <section id="network" class="section">
+                <div class="section-header">
+                    <h2><i class="fas fa-network-wired"></i> Réseau & Pare-feu</h2>
+                    <span class="section-tag">Connectivité</span>
+                </div>
+
+                <!-- Catégorie : Pare-feu Windows -->
+                <div class="category">
+                    <div class="category-header" onclick="toggleCategory(this)">
+                        <h3><i class="fas fa-fire"></i> Pare-feu Windows</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="category-content">
+                        <!-- COMMANDE 1 -->
+                        <div class="command-item">
+                            <div class="command-meta">
+                                <span class="risk-high">RISQUE ÉLEVÉ</span>
+                                <span class="category-tag">SÉCURITÉ</span>
+                                <span class="time-tag">⏱️ 5 secondes</span>
+                            </div>
+                            
+                            <h3>Activer/désactiver le pare-feu</h3>
+                            
+                            <pre class="command-code"># Désactiver temporairement le pare-feu
+Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
+
+# Activer le pare-feu
+Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled True
+
+# Vérifier l'état du pare-feu
+Get-NetFirewallProfile | Select-Object Name, Enabled</pre>
+                            
+                            <div class="command-notes">
+                                <div class="note note-when">
+                                    <div class="note-title">🎯 Quand utiliser</div>
+                                    <p>Tests de connectivité, dépannage réseau</p>
+                                </div>
+                                <div class="note note-warning">
+                                    <div class="note-title">⚠️ Attention</div>
+                                    <p>Ne pas laisser le pare-feu désactivé en production</p>
+                                </div>
+                                <div class="note note-scenario">
+                                    <div class="note-title">🚨 Scénario</div>
+                                    <p>Impossible de ping un serveur, ports bloqués</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- COMMANDE 2 -->
+                        <div class="command-item">
+                            <div class="command-meta">
+                                <span class="risk-medium">RISQUE MOYEN</span>
+                                <span class="category-tag">SÉCURITÉ</span>
+                                <span class="time-tag">⏱️ 10 secondes</span>
+                            </div>
+                            
+                            <h3>Créer des règles de pare-feu</h3>
+                            
+                            <pre class="command-code"># Autoriser ICMP (ping) pour un réseau spécifique
+New-NetFirewallRule `
+  -DisplayName "Allow ICMPv4 LAN" `
+  -Direction Inbound `
+  -Protocol ICMPv4 `
+  -ICMPType 8 `
+  -RemoteAddress 192.168.1.0/24 `
+  -Profile Any `
+  -Action Allow
+
+# Autoriser le trafic forwardé
+New-NetFirewallRule `
+  -DisplayName "Allow Forwarded Traffic" `
+  -Direction Inbound `
+  -Action Allow `
+  -Profile Any `
+  -InterfaceAlias "Ethernet 2" `
+  -Protocol Any</pre>
+                            
+                            <div class="command-notes">
+                                <div class="note note-when">
+                                    <div class="note-title">🎯 Quand utiliser</div>
+                                    <p>Ouverture de ports pour applications, routage</p>
+                                </div>
+                                <div class="note note-warning">
+                                    <div class="note-title">⚠️ Attention</div>
+                                    <p>Limiter les règles aux adresses IP nécessaires uniquement</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- COMMANDE 3 -->
+                        <div class="command-item">
+                            <div class="command-meta">
+                                <span class="risk-low">RISQUE FAIBLE</span>
+                                <span class="category-tag">SÉCURITÉ</span>
+                                <span class="time-tag">⏱️ 5 secondes</span>
+                            </div>
+                            
+                            <h3>Gestion des règles de pare-feu</h3>
+                            
+                            <pre class="command-code"># Supprimer une règle par son nom
+Remove-NetFirewallRule -DisplayName "Allow ICMPv4 Anywhere"
+
+# Supprimer plusieurs règles
+Get-NetFirewallRule -Profile Private | Remove-NetFirewallRule
+
+# Activer des groupes de règles
+Enable-NetFirewallRule -DisplayGroup "File and Printer Sharing"
+Enable-NetFirewallRule -DisplayGroup "Remote Service Management"</pre>
+                            
+                            <div class="command-notes">
+                                <div class="note note-when">
+                                    <div class="note-title">🎯 Quand utiliser</div>
+                                    <p>Nettoyage de règles obsolètes, activation de fonctionnalités</p>
+                                </div>
+                                <div class="note note-test">
+                                    <div class="note-title">✅ Test de succès</div>
+                                    <p>Les services nécessaires sont accessibles</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Catégorie : Routage & NAT -->
+                <div class="category">
+                    <div class="category-header" onclick="toggleCategory(this)">
+                        <h3><i class="fas fa-route"></i> Routage & NAT</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="category-content">
+                        <!-- COMMANDE 1 -->
+                        <div class="command-item">
+                            <div class="command-meta">
+                                <span class="risk-high">RISQUE ÉLEVÉ</span>
+                                <span class="category-tag">RÉSEAU</span>
+                                <span class="time-tag">⏱️ 30 secondes</span>
+                            </div>
+                            
+                            <h3>Configuration NAT</h3>
+                            
+                            <pre class="command-code"># Créer une configuration NAT
+New-NetNat -Name "[NOM_NAT]" `
+    -InternalIPInterfaceAddressPrefix "[RESEAU_CIDR]"
+
+# Exemple pour réseau interne
+New-NetNat -Name "LAN-NAT" `
+    -InternalIPInterfaceAddressPrefix "192.168.1.0/24"
+
+# Voir configurations existantes
+Get-NetNat
+
+# Supprimer une configuration
+Remove-NetNat -Name "[NOM_NAT]" -Confirm:$false</pre>
+                            
+                            <div class="command-notes">
+                                <div class="note note-when">
+                                    <div class="note-title">🎯 Quand utiliser</div>
+                                    <p>Partage de connexion Internet, masquage d'adresses</p>
+                                </div>
+                                <div class="note note-warning">
+                                    <div class="note-title">⚠️ Attention</div>
+                                    <p>Configuration complexe, bien tester</p>
+                                </div>
+                                <div class="note note-test">
+                                    <div class="note-title">✅ Test de succès</div>
+                                    <p>Les clients du réseau interne peuvent accéder à Internet</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- COMMANDE 2 -->
+                        <div class="command-item">
+                            <div class="command-meta">
+                                <span class="risk-medium">RISQUE MOYEN</span>
+                                <span class="category-tag">RÉSEAU</span>
+                                <span class="time-tag">⏱️ 15 secondes</span>
+                            </div>
+                            
+                            <h3>Gestion du routage IP</h3>
+                            
+                            <pre class="command-code"># Activer/désactiver le forwarding IP
+Set-NetIPInterface -InterfaceAlias "Ethernet 2" -Forwarding Enabled
+Set-NetIPInterface -InterfaceAlias "Ethernet" -Forwarding Disabled
+
+# Ajouter une route statique
+New-NetRoute -DestinationPrefix "172.16.0.0/24" `
+    -NextHop "172.16.2.140" `
+    -InterfaceIndex 2 `
+    -PolicyStore PersistentStore
+
+# Vérifier les routes
+Get-NetRoute -AddressFamily IPv4 | Where-Object {$_.DestinationPrefix -ne "0.0.0.0/0"} | Format-Table</pre>
+                            
+                            <div class="command-notes">
+                                <div class="note note-when">
+                                    <div class="note-title">🎯 Quand utiliser</div>
+                                    <p>Configuration de routeurs, connexion entre réseaux</p>
+                                </div>
+                                <div class="note note-warning">
+                                    <div class="note-title">⚠️ Attention</div>
+                                    <p>Les routes incorrectes peuvent couper la connectivité</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- COMMANDE 3 -->
+                        <div class="command-item">
+                            <div class="command-meta">
+                                <span class="risk-medium">RISQUE MOYEN</span>
+                                <span class="category-tag">RÉSEAU</span>
+                                <span class="time-tag">⏱️ 10 secondes</span>
+                            </div>
+                            
+                            <h3>Configuration DHCP Relay</h3>
+                            
+                            <pre class="command-code"># Installer DHCP Relay (via netsh)
+netsh routing ip relay install
+
+# Déclarer le serveur DHCP
+netsh routing ip relay add dhcpserver 172.16.2.1
+
+# Activer DHCP Relay sur une interface
+netsh routing ip relay add interface "Ethernet 2"</pre>
+                            
+                            <div class="command-notes">
+                                <div class="note note-when">
+                                    <div class="note-title">🎯 Quand utiliser</div>
+                                    <p>Relayer les requêtes DHCP entre réseaux</p>
+                                </div>
+                                <div class="note note-warning">
+                                    <div class="note-title">⚠️ Attention</div>
+                                    <p>Nécessite une configuration de pare-feu appropriée</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION ACTIVE DIRECTORY -->
+            <section id="ad" class="section">
+                <div class="section-header">
+                    <h2><i class="fas fa-users-cog"></i> Active Directory</h2>
+                    <span class="section-tag">Domain Services</span>
+                </div>
+
+                <!-- Structure AD -->
+                <div class="command-item">
+                    <div class="command-meta">
+                        <span class="risk-low">RISQUE FAIBLE</span>
+                        <span class="category-tag">STRUCTURE</span>
+                        <span class="time-tag">⏱️ Planification</span>
+                    </div>
+                    
+                    <h3>Structure AD</h3>
+                    
+                    <div class="ad-structure">
+HP-Network
+│
+├── Ordinateurs
+│   ├── Administration
+│   │   ├── Direction
+│   │   ├── Comptabilite
+│   │   └── Secretariat
+│   │   └── IT
+│   └── Salles-Formation
+│       ├── AIS
+│       ├── TSSR
+│       ├── DevOps
+│       └── Assistance-Enfance
+│
+├── Utilisateurs
+│   ├── Direction
+│   │   ├── fabrice.iraduha@afci.lab
+│   ├── Comptabilite
+│   │   ├── claire.muyizere@afci.lab
+│   ├── Secretariat
+│   ├── AIS
+│   │   ├── erci.nkuru@afci.lab
+│   ├── TSSR
+│   ├── DevOps
+│   └── Assistance-Enfance
+│
+├── _Admins
+│   ├── IT
+│   │   ├── yannick.sugira@afci.lab
+│   └── Direction
+│       ├── fabrice.iraguha@afci.lab
+│
+├── Groupes
+│   ├── Globaux
+│   │   ├── Metiers
+│   │   │   ├── GG_Direction
+│   │   │   ├── GG_Comptabilite
+│   │   │   ├── GG_Secretariat
+│   │   │   ├── GG_AIS
+│   │   │   ├── GG_TSSR
+│   │   │   ├── GG_DevOps
+│   │   │   └── GG_Assistance_Enfance
+│   │   └── Specifiques
+│   │       ├── GG_TSSR_ReadOnly
+│   │       ├── GG_DevOps_Formateurs
+│   │       └── GG_Stagiaires
+│   └── Locaux-Domaine
+│       ├── Fichiers
+│       │   ├── DL_FS_Commun_RW
+│       │   ├── DL_FS_Commun_R
+│       │   ├── DL_FS_Administration_RW
+│       │   ├── DL_FS_Administration_R
+│       │   ├── DL_FS_Formation_RW
+│       │   └── DL_FS_Formation_R
+│       └── GPO
+│           ├── DL_GPO_TSSR
+│           ├── DL_GPO_DevOps
+│           ├── DL_GPO_AIS
+│           ├── DL_GPO_Direction
+│           ├── DL_GPO_Secretariat
+│           ├── DL_GPO_Comptabilite
+│           └── DL_GPO_Assistance-Enfance
+│
+└── Serveurs
+    ├── SRV-01 Lille
+    ├── SRV-02 Lille
+    └── SRV-03 Arras
+                    </div>
+                    
+                    <div class="command-notes">
+                        <div class="note note-when">
+                            <div class="note-title">🎯 Objectif de la structure</div>
+                            <p>Organisation logique pour gestion fluide et application simplifiée des GPO</p>
+                        </div>
+                        <div class="note note-test">
+                            <div class="note-title">✅ Bonnes pratiques</div>
+                            <p>Séparation administration/utilisateurs, regroupement par métier</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Catégorie : Création Structure AD -->
+                <div class="category">
+                    <div class="category-header" onclick="toggleCategory(this)">
+                        <h3><i class="fas fa-sitemap"></i> Création Structure AD</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="category-content">
+                        <!-- COMMANDE 1 -->
+                        <div class="command-item">
+                            <div class="command-meta">
+                                <span class="risk-medium">RISQUE MOYEN</span>
+                                <span class="category-tag">STRUCTURE</span>
+                                <span class="time-tag">⏱️ 10 minutes</span>
+                            </div>
+                            
+                            <h3>Créer les Unités d'Organisation (OU)</h3>
+                            
+                            <pre class="command-code"># OU principales
+$DomainDN = "DC=afci,DC=lab"
+New-ADOrganizationalUnit -Name "AFCI-Formation" -Path $DomainDN -ProtectedFromAccidentalDeletion $true
+New-ADOrganizationalUnit -Name "Ordinateurs" -Path "OU=AFCI-Formation,$DomainDN"
+New-ADOrganizationalUnit -Name "Utilisateurs" -Path "OU=AFCI-Formation,$DomainDN"
+New-ADOrganizationalUnit -Name "_Admins" -Path "OU=AFCI-Formation,$DomainDN"
+New-ADOrganizationalUnit -Name "Groupes" -Path "OU=AFCI-Formation,$DomainDN"
+New-ADOrganizationalUnit -Name "Serveurs" -Path "OU=AFCI-Formation,$DomainDN"
+
+# Sous-OU Ordinateurs
+New-ADOrganizationalUnit -Name "Administration" -Path "OU=Ordinateurs,OU=AFCI-Formation,$DomainDN"
+New-ADOrganizationalUnit -Name "Salles-Formation" -Path "OU=Ordinateurs,OU=AFCI-Formation,$DomainDN"</pre>
+                            
+                            <div class="command-notes">
+                                <div class="note note-when">
+                                    <div class="note-title">🎯 Quand utiliser</div>
+                                    <p>Initialisation de la structure Active Directory</p>
+                                </div>
+                                <div class="note note-warning">
+                                    <div class="note-title">⚠️ Attention</div>
+                                    <p>Planifier la structure avant création</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- COMMANDE 2 -->
+                        <div class="command-item">
+                            <div class="command-meta">
+                                <span class="risk-medium">RISQUE MOYEN</span>
+                                <span class="category-tag">STRUCTURE</span>
+                                <span class="time-tag">⏱️ 5 minutes</span>
+                            </div>
+                            
+                            <h3>Créer les groupes AD</h3>
+                            
+                            <pre class="command-code"># Création de groupes pour les partages
+$DLGroups = @(
+    "LD-FS-Commun-R",
+    "LD-FS-Commun-RW",
+    "LD-FS-Commun-F",
+    "LD-FS-Formation-R",
+    "LD-FS-Formation-RW",
+    "LD-FS-Formation-F",
+    "LD-FS-Administration-RW",
+    "LD-FS-Administration-F"
+)
+
+foreach ($group in $DLGroups) {
+    New-ADGroup `
+        -Name $group `
+        -GroupScope DomainLocal `
+        -GroupCategory Security `
+        -Path "OU=Groupes,DC=afci,DC=lab"
+}</pre>
+                            
+                            <div class="command-notes">
+                                <div class="note note-when">
+                                    <div class="note-title">🎯 Quand utiliser</div>
+                                    <p>Création des groupes pour gestion des permissions</p>
+                                </div>
+                                <div class="note note-test">
+                                    <div class="note-title">✅ Test de succès</div>
+                                    <p>Les groupes apparaissent dans l'OU Groupes</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Catégorie : Utilisateurs & Groupes -->
+                <div class="category">
+                    <div class="category-header" onclick="toggleCategory(this)">
+                        <h3><i class="fas fa-user-plus"></i> Utilisateurs & Groupes</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="category-content">
+                        <!-- COMMANDE 1 -->
+                        <div class="command-item">
+                            <div class="command-meta">
+                                <span class="risk-low">RISQUE FAIBLE</span>
+                                <span class="category-tag">UTILISATEURS</span>
+                                <span class="time-tag">⏱️ 10 secondes</span>
+                            </div>
+                            
+                            <h3>Créer un utilisateur AD</h3>
+                            
+                            <pre class="command-code"># Créer un nouvel utilisateur
+New-ADUser -Name "[NOM_COMPLET]" `
+    -GivenName "[PRENOM]" `
+    -Surname "[NOM]" `
+    -SamAccountName "[LOGIN]" `
+    -UserPrincipalName "[LOGIN]@[DOMAINE]" `
+    -Enabled $true `
+    -AccountPassword (ConvertTo-SecureString "[MDP]" -AsPlainText -Force)</pre>
+                            
+                            <div class="command-notes">
+                                <div class="note note-when">
+                                    <div class="note-title">🎯 Quand utiliser</div>
+                                    <p>Création de comptes utilisateurs en masse</p>
+                                </div>
+                                <div class="note note-warning">
+                                    <div class="note-title">⚠️ Attention</div>
+                                    <p>Le mot de passe doit respecter la politique de sécurité</p>
+                                </div>
+                                <div class="note note-test">
+                                    <div class="note-title">✅ Test de succès</div>
+                                    <p>L'utilisateur peut se connecter au domaine</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- COMMANDE 2 -->
+                        <div class="command-item">
+                            <div class="command-meta">
+                                <span class="risk-low">RISQUE FAIBLE</span>
+                                <span class="category-tag">GROUPES</span>
+                                <span class="time-tag">⏱️ 5 secondes</span>
+                            </div>
+                            
+                            <h3>Gestion des membres de groupes</h3>
+                            
+                            <pre class="command-code"># Ajouter des membres à un groupe
+Add-ADGroupMember -Identity "LD-FS-Commun-R" `
+    -Members "GG-Direction","GG-Comptabilite","GG-Secretariat"
+
+# Retirer un membre
+Remove-ADGroupMember -Identity "LD-FS-Commun-R" `
+    -Members "GG-Secretariat" -Confirm:$false
+
+# Vérifier les membres
+Get-ADGroupMember -Identity "LD-FS-Commun-R" | Select-Object Name</pre>
+                            
+                            <div class="command-notes">
+                                <div class="note note-when">
+                                    <div class="note-title">🎯 Quand utiliser</div>
+                                    <p>Configuration des permissions par groupes</p>
+                                </div>
+                                <div class="note note-test">
+                                    <div class="note-title">✅ Test de succès</div>
+                                    <p>Les permissions s'appliquent correctement</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Catégorie : DC Répliqué -->
+                <div class="category">
+                    <div class="category-header" onclick="toggleCategory(this)">
+                        <h3><i class="fas fa-sync-alt"></i> DC Répliqué</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="category-content">
+                        <!-- COMMANDE 1 -->
+                        <div class="command-item">
+                            <div class="command-meta">
+                                <span class="risk-high">RISQUE ÉLEVÉ</span>
+                                <span class="category-tag">RÉPLICATION</span>
+                                <span class="time-tag">⏱️ 10-30 minutes</span>
+                            </div>
+                            
+                            <h3>Promouvoir en DC répliqué</h3>
+                            
+                            <pre class="command-code"># Promouvoir un serveur en DC répliqué
+Install-ADDSDomainController `
+    -DomainName "afci.lab" `
+    -SafeModeAdministratorPassword $SafeModePwd `
+    -Credential $PromotionCreds `
+    -InstallDns `
+    -NoGlobalCatalog:$false `
+    -SiteName "Default-First-Site-Name" `
+    -ReplicationSourceDC "SRV-01.afci.lab" `
+    -CreateDnsDelegation:$false `
+    -NoRebootOnCompletion:$false `
+    -Force</pre>
+                            
+                            <div class="command-notes">
+                                <div class="note note-when">
+                                    <div class="note-title">🎯 Quand utiliser</div>
+                                    <p>Ajout d'un contrôleur de domaine supplémentaire</p>
+                                </div>
+                                <div class="note note-warning">
+                                    <div class="note-title">⚠️ Attention</div>
+                                    <p>Opération irréversible, nécessite un redémarrage</p>
+                                </div>
+                                <div class="note note-test">
+                                    <div class="note-title">✅ Test de succès</div>
+                                    <p>`repadmin /replsummary` montre une réplication saine</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- COMMANDE 2 -->
+                        <div class="command-item">
+                            <div class="command-meta">
+                                <span class="risk-low">RISQUE FAIBLE</span>
+                                <span class="category-tag">DIAGNOSTIC</span>
+                                <span class="time-tag">⏱️ 5 secondes</span>
+                            </div>
+                            
+                            <h3>Vérifier la réplication AD</h3>
+                            
+                            <pre class="command-code"># Vérifier l'état de réplication
+repadmin /replsummary
+
+# Vérifier les informations du DC
+Get-ADDomainController -Identity "SRV-03" | Format-List *
+
+# Tester la connectivité DNS
+Resolve-DnsName afci.lab -Server 172.16.2.65</pre>
+                            
+                            <div class="command-notes">
+                                <div class="note note-when">
+                                    <div class="note-title">🎯 Quand utiliser</div>
+                                    <p>Surveillance de la santé AD, dépannage</p>
+                                </div>
+                                <div class="note note-test">
+                                    <div class="note-title">✅ Test de succès</div>
+                                    <p>Aucune erreur dans le résumé de réplication</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION DHCP & DNS -->
+            <section id="dhcp-dns" class="section">
+                <div class="section-header">
+                    <h2><i class="fas fa-dharmachakra"></i> DHCP & DNS</h2>
+                    <span class="section-tag">Services Réseau</span>
+                </div>
+
+                <!-- Catégorie : Configuration DHCP -->
+                <div class="category">
+                    <div class="category-header" onclick="toggleCategory(this)">
+                        <h3><i class="fas fa-bolt"></i> Configuration DHCP</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="category-content">
+                        <!-- COMMANDE 1 -->
+                        <div class="command-item">
+                            <div class="command-meta">
+                                <span class="risk-medium">RISQUE MOYEN</span>
+                                <span class="category-tag">DHCP</span>
+                                <span class="time-tag">⏱️ 30 secondes</span>
+                            </div>
+                            
+                            <h3>Créer un scope DHCP</h3>
+                            
+                            <pre class="command-code"># Créer un scope DHCP
+Add-DhcpServerv4Scope `
+    -Name "[NOM_SCOPE]" `
+    -StartRange [DEBUT_PLAGE] `
+    -EndRange [FIN_PLAGE] `
+    -SubnetMask [MASQUE_SOUS_RESEAU] `
+    -State Active
+
+# Exemple pour réseau 192.168.1.0/24
+Add-DhcpServerv4Scope `
+    -Name "Scope-Bureau" `
+    -StartRange 192.168.1.100 `
+    -EndRange 192.168.1.200 `
+    -SubnetMask 255.255.255.0 `
+    -State Active</pre>
+                            
+                            <div class="command-notes">
+                                <div class="note note-when">
+                                    <div class="note-title">🎯 Quand utiliser</div>
+                                    <p>Mise en place d'une nouvelle plage DHCP</p>
+                                </div>
+                                <div class="note note-warning">
+                                    <div class="note-title">⚠️ Attention</div>
+                                    <p>Éviter les conflits avec les adresses statiques</p>
+                                </div>
+                                <div class="note note-test">
+                                    <div class="note-title">✅ Test de succès</div>
+                                    <p>Les clients reçoivent une adresse de la plage</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- COMMANDE 2 -->
+                        <div class="command-item">
+                            <div class="command-meta">
+                                <span class="risk-medium">RISQUE MOYEN</span>
+                                <span class="category-tag">DHCP</span>
+                                <span class="time-tag">⏱️ 15 secondes</span>
+                            </div>
+                            
+                            <h3>Configuration DHCP avancée</h3>
+                            
+                            <pre class="command-code"># Autoriser le serveur DHCP dans AD
+Add-DhcpServerInDC `
+  -DnsName "SRV-DHCP.afci.local" `
+  -IPAddress 172.16.2.1
+
+# Configurer les options DHCP
+Set-DhcpServerv4OptionValue `
+  -ScopeId 192.168.0.0 `
+  -Router 192.168.0.254 `
+  -DnsServer 172.16.2.1 `
+  -DnsDomain "afci.lab"
+
+# Créer une réservation IP
+Add-DhcpServerv4Reservation `
+  -ScopeId 192.168.0.0 `
+  -IPAddress 192.168.0.1 `
+  -ClientId "00-00-00-0B-00-00" `
+  -Name "Reservation-PC-Admin"</pre>
+                            
+                            <div class="command-notes">
+                                <div class="note note-when">
+                                    <div class="note-title">🎯 Quand utiliser</div>
+                                    <p>Configuration complète du service DHCP</p>
+                                </div>
+                                <div class="note note-warning">
+                                    <div class="note-title">⚠️ Attention</div>
+                                    <p>Vérifier les conflits d'adresses IP</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- COMMANDE 3 -->
+                        <div class="command-item">
+                            <div class="command-meta">
+                                <span class="risk-medium">RISQUE MOYEN</span>
+                                <span class="category-tag">DHCP</span>
+                                <span class="time-tag">⏱️ 2 minutes</span>
+                            </div>
+                            
+                            <h3>Configuration DHCP Failover</h3>
+                            
+                            <pre class="command-code"># Configuration du failover pour un scope
+Add-DhcpServerv4Failover `
+    -Name "Failover-Lille-Scope" `
+    -ScopeId 172.16.0.0 `
+    -PartnerServer "SRV-03.afci.lab" `
+    -ComputerName "SRV-01.afci.lab" `
+    -LoadBalancePercent 50 `
+    -MaxClientLeadTime 01:00:00
+
+# Vérifier les scopes
+Get-DhcpServerv4Scope -ComputerName "SRV-01.afci.lab"
+Get-DhcpServerv4Scope -ComputerName "SRV-03.afci.lab"</pre>
+                            
+                            <div class="command-notes">
+                                <div class="note note-when">
+                                    <div class="note-title">🎯 Quand utiliser</div>
+                                    <p>Mise en place de haute disponibilité DHCP</p>
+                                </div>
+                                <div class="note note-test">
+                                    <div class="note-title">✅ Test de succès</div>
+                                    <p>Les clients reçoivent des adresses même si un serveur est down</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Catégorie : Configuration DNS -->
+                <div class="category">
+                    <div class="category-header" onclick="toggleCategory(this)">
+                        <h3><i class="fas fa-globe"></i> Configuration DNS</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="category-content">
+                        <!-- COMMANDE 1 -->
+                        <div class="command-item">
+                            <div class="command-meta">
+                                <span class="risk-low">RISQUE FAIBLE</span>
+                                <span class="category-tag">DNS</span>
+                                <span class="time-tag">⏱️ 10 secondes</span>
+                            </div>
+                            
+                            <h3>Créer des enregistrements DNS</h3>
+                            
+                            <pre class="command-code"># Ajouter un enregistrement A
+Add-DnsServerResourceRecordA `
+    -Name "srv04" `
+    -ZoneName "afci.lab" `
+    -IPv4Address "172.16.2.104"
+
+# Ajouter un enregistrement CNAME
+Add-DnsServerResourceRecordCName `
+    -Name "www" `
+    -HostNameAlias "srv01.afci.lab" `
+    -ZoneName "afci.lab"
+
+# Vérifier les enregistrements
+Get-DnsServerResourceRecord -ZoneName "afci.lab" -RRType A</pre>
+                            
+                            <div class="command-notes">
+                                <div class="note note-when">
+                                    <div class="note-title">🎯 Quand utiliser</div>
+                                    <p>Configuration manuelle de DNS pour nouveaux serveurs</p>
+                                </div>
+                                <div class="note note-test">
+                                    <div class="note-title">✅ Test de succès</div>
+                                    <p>Résolution DNS fonctionnelle pour le nouveau nom</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION FICHIERS & PARTAGES -->
+            <section id="file" class="section">
+                <div class="section-header">
+                    <h2><i class="fas fa-folder"></i> Fichiers & Partages</h2>
+                    <span class="section-tag">Partages SMB</span>
+                </div>
+
+                <!-- Catégorie : Création Partages -->
+                <div class="category">
+                    <div class="category-header" onclick="toggleCategory(this)">
+                        <h3><i class="fas fa-share-alt"></i> Création Partages</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="category-content">
+                        <!-- COMMANDE 1 -->
+                        <div class="command-item">
+                            <div class="command-meta">
+                                <span class="risk-medium">RISQUE MOYEN</span>
+                                <span class="category-tag">PARTAGE</span>
+                                <span class="time-tag">⏱️ 10 minutes</span>
+                            </div>
+                            
+                            <h3>Créer l'arborescence et les partages</h3>
+                            
+                            <pre class="command-code"># Création de l'arborescence
+New-Item -ItemType Directory -Path "C:\Shares\Commun" -Force
+New-Item -ItemType Directory -Path "C:\Shares\Formation" -Force
+New-Item -ItemType Directory -Path "C:\Shares\Administration" -Force
+
+# Nettoyer les droits NTFS par défaut
+$Folders = @("C:\Shares\Commun", "C:\Shares\Formation", "C:\Shares\Administration")
+foreach ($folder in $Folders) {
+    icacls $folder /inheritance:r
+    icacls $folder /remove "Users"
+}
+
+# Attribution des droits NTFS
+icacls "C:\Shares\Commun" /grant `
+  "AFCI\LD-FS-Commun-F:(OI)(CI)(F)" `
+  "AFCI\DL-FS-Commun-RW:(OI)(CI)(M)" `
+  "AFCI\DL-FS-Commun-R:(OI)(CI)(RX)"</pre>
+                            
+                            <div class="command-notes">
+                                <div class="note note-when">
+                                    <div class="note-title">🎯 Quand utiliser</div>
+                                    <p>Configuration initiale des partages de fichiers</p>
+                                </div>
+                                <div class="note note-warning">
+                                    <div class="note-title">⚠️ Attention</div>
+                                    <p>Les permissions NTFS sont cumulatives avec les permissions SMB</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- COMMANDE 2 -->
+                        <div class="command-item">
+                            <div class="command-meta">
+                                <span class="risk-medium">RISQUE MOYEN</span>
+                                <span class="category-tag">PARTAGE</span>
+                                <span class="time-tag">⏱️ 5 minutes</span>
+                            </div>
+                            
+                            <h3>Créer les partages SMB</h3>
+                            
+                            <pre class="command-code"># Création des partages SMB
+New-SmbShare -Name "Commun$" `
+  -Path "C:\Shares\Commun" `
+  -ChangeAccess "AFCI\LD-FS-Commun-RW" `
+  -ReadAccess "AFCI\LD-FS-Commun-R" `
+  -FullAccess "AFCI\LD-FS-Administration-F"
+
+New-SmbShare -Name "Formation$" `
+  -Path "C:\Shares\Formation" `
+  -ChangeAccess "AFCI\LD-FS-Formation-RW" `
+  -ReadAccess "AFCI\LD-FS-Formation-R" `
+  -FullAccess "AFCI\LD-FS-Administration-F"
+
+# Vérifier les partages
+Get-SmbShareAccess Commun$
+Get-SmbShareAccess Formation$</pre>
+                            
+                            <div class="command-notes">
+                                <div class="note note-when">
+                                    <div class="note-title">🎯 Quand utiliser</div>
+                                    <p>Publication des dossiers en partages réseau</p>
+                                </div>
+                                <div class="note note-test">
+                                    <div class="note-title">✅ Test de succès</div>
+                                    <p>Accès au partage depuis un client du domaine</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION GPO & STRATÉGIES -->
+            <section id="gpo" class="section">
+                <div class="section-header">
+                    <h2><i class="fas fa-sliders-h"></i> GPO & Stratégies</h2>
+                    <span class="section-tag">Stratégies de groupe</span>
+                </div>
+
+                <!-- Catégorie : Gestion GPO -->
+                <div class="category">
+                    <div class="category-header" onclick="toggleCategory(this)">
+                        <h3><i class="fas fa-cogs"></i> Gestion GPO</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="category-content">
+                        <!-- COMMANDE 1 -->
+                        <div class="command-item">
+                            <div class="command-meta">
+                                <span class="risk-medium">RISQUE MOYEN</span>
+                                <span class="category-tag">GPO</span>
+                                <span class="time-tag">⏱️ 5 minutes</span>
+                            </div>
+                            
+                            <h3>Créer et lier une GPO</h3>
+                            
+                            <pre class="command-code"># Créer une nouvelle GPO
+New-GPO -Name "GPO-SEC-Windows-LAPS-Ordinateurs" `
+    -Comment "Gestion automatique des mots de passe admin locaux via Windows LAPS"
+
+# Lier la GPO à une OU
+New-GPLink `
+    -Name "GPO-SEC-Windows-LAPS-Ordinateurs" `
+    -Target "OU=Ordinateurs,DC=afci,DC=lab" `
+    -LinkEnabled Yes
+
+# Vérifier les GPO
+Get-GPO -All | Where-Object { $_.DisplayName -like "*LAPS*" }</pre>
+                            
+                            <div class="command-notes">
+                                <div class="note note-when">
+                                    <div class="note-title">🎯 Quand utiliser</div>
+                                    <p>Déploiement de stratégies de sécurité</p>
+                                </div>
+                                <div class="note note-warning">
+                                    <div class="note-title">⚠️ Attention</div>
+                                    <p>Les GPO peuvent affecter de nombreux ordinateurs</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- COMMANDE 2 -->
+                        <div class="command-item">
+                            <div class="command-meta">
+                                <span class="risk-medium">RISQUE MOYEN</span>
+                                <span class="category-tag">GPO</span>
+                                <span class="time-tag">⏱️ 10 minutes</span>
+                            </div>
+                            
+                            <h3>Configurer GPO via registre</h3>
+                            
+                            <pre class="command-code"># Configuration LAPS via registre
+$LAPSRegistryKey = "HKLM\Software\Microsoft\Policies\LAPS"
+$GPOName = "GPO-SEC-Windows-LAPS-Ordinateurs"
+
+# Sauvegarde dans Active Directory
+Set-GPRegistryValue -GpoName $GPOName -Key $LAPSRegistryKey `
+    -ValueName "BackupDirectory" -Type DWord -Value 1
+
+# Durée de validité (30 jours)
+Set-GPRegistryValue -GpoName $GPOName -Key $LAPSRegistryKey `
+    -ValueName "PasswordAgeDays" -Type DWord -Value 30
+
+# Longueur du mot de passe
+Set-GPRegistryValue -GpoName $GPOName -Key $LAPSRegistryKey `
+    -ValueName "PasswordLength" -Type DWord -Value 14</pre>
+                            
+                            <div class="command-notes">
+                                <div class="note note-when">
+                                    <div class="note-title">🎯 Quand utiliser</div>
+                                    <p>Configuration avancée de stratégies</p>
+                                </div>
+                                <div class="note note-test">
+                                    <div class="note-title">✅ Test de succès</div>
+                                    <p>Les paramètres s'appliquent après `gpupdate /force`</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Catégorie : Windows LAPS -->
+                <div class="category">
+                    <div class="category-header" onclick="toggleCategory(this)">
+                        <h3><i class="fas fa-key"></i> Windows LAPS</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="category-content">
+                        <!-- COMMANDE 1 -->
+                        <div class="command-item">
+                            <div class="command-meta">
+                                <span class="risk-high">RISQUE ÉLEVÉ</span>
+                                <span class="category-tag">SÉCURITÉ</span>
+                                <span class="time-tag">⏱️ 15 minutes</span>
+                            </div>
+                            
+                            <h3>Déploiement Windows LAPS</h3>
+                            
+                            <pre class="command-code"># Installer le module LAPS
+Get-WindowsCapability -Name RSAT*LAPS* -Online
+Add-WindowsCapability -Online -Name Rsat.Laps.Tools~~~~0.0.1.0
+Import-Module LAPS
+
+# Mise à jour du schéma AD (1 seule fois)
+Update-LapsADSchema
+
+# Autoriser les ordinateurs à écrire leur mot de passe
+Set-LapsADComputerSelfPermission -Identity "OU=Ordinateurs,DC=afci,DC=lab"
+
+# Délégation de lecture des mots de passe LAPS
+Set-LapsADReadPasswordPermission `
+    -Identity "OU=Ordinateurs,DC=afci,DC=lab" `
+    -AllowedPrincipals "GG_IT_Admin"</pre>
+                            
+                            <div class="command-notes">
+                                <div class="note note-when">
+                                    <div class="note-title">🎯 Quand utiliser</div>
+                                    <p>Mise en place de la gestion automatique des mots de passe admin locaux</p>
+                                </div>
+                                <div class="note note-warning">
+                                    <div class="note-title">⚠️ Attention</div>
+                                    <p>Opération sensible nécessitant des droits d'administrateur d'entreprise</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION SERVICES & RÔLES -->
+            <section id="services" class="section">
+                <div class="section-header">
+                    <h2><i class="fas fa-cogs"></i> Services & Rôles</h2>
+                    <span class="section-tag">Administration</span>
+                </div>
+
+                <!-- Catégorie : RRAS & Routage -->
+                <div class="category">
+                    <div class="category-header" onclick="toggleCategory(this)">
+                        <h3><i class="fas fa-route"></i> RRAS & Routage</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="category-content">
+                        <!-- COMMANDE 1 -->
+                        <div class="command-item">
+                            <div class="command-meta">
+                                <span class="risk-high">RISQUE ÉLEVÉ</span>
+                                <span class="category-tag">ROUTAGE</span>
+                                <span class="time-tag">⏱️ 5 minutes</span>
+                            </div>
+                            
+                            <h3>Installer et configurer RRAS</h3>
+                            
+                            <pre class="command-code"># Installer le rôle Routage et Accès à distance
+Install-WindowsFeature RemoteAccess, Routing -IncludeManagementTools
+
+# Activer le service RRAS
+Install-RemoteAccess -VpnType RoutingOnly
+
+# Démarrer et configurer le service
+Set-Service RemoteAccess -StartupType Automatic
+Start-Service RemoteAccess</pre>
+                            
+                            <div class="command-notes">
+                                <div class="note note-when">
+                                    <div class="note-title">🎯 Quand utiliser</div>
+                                    <p>Configuration d'un serveur comme routeur</p>
+                                </div>
+                                <div class="note note-warning">
+                                    <div class="note-title">⚠️ Attention</div>
+                                    <p>Nécessite un redémarrage après installation</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Catégorie : Gestion à Distance -->
+                <div class="category">
+                    <div class="category-header" onclick="toggleCategory(this)">
+                        <h3><i class="fas fa-laptop-house"></i> Gestion à Distance</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="category-content">
+                        <!-- COMMANDE 1 -->
+                        <div class="command-item">
+                            <div class="command-meta">
+                                <span class="risk-medium">RISQUE MOYEN</span>
+                                <span class="category-tag">ADMINISTRATION</span>
+                                <span class="time-tag">⏱️ 15 secondes</span>
+                            </div>
+                            
+                            <h3>Configurer Remote Desktop</h3>
+                            
+                            <pre class="command-code"># Activer Remote Desktop
+Set-ItemProperty -Path "HKLM:\\System\\CurrentControlSet\\Control\\Terminal Server" `
+                 -Name "fDenyTSConnections" -Value 0
+
+# Activer les règles de pare-feu pour RDP
+Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
+
+# Ajouter un utilisateur aux utilisateurs RDP
+Add-LocalGroupMember -Group "Remote Desktop Users" -Member "[NOM_UTILISATEUR]"</pre>
+                            
+                            <div class="command-notes">
+                                <div class="note note-when">
+                                    <div class="note-title">🎯 Quand utiliser</div>
+                                    <p>Accès à distance à un serveur Windows</p>
+                                </div>
+                                <div class="note note-warning">
+                                    <div class="note-title">⚠️ Attention</div>
+                                    <p>Sécuriser RDP avec NLA et utilisateurs limités</p>
+                                </div>
+                                <div class="note note-test">
+                                    <div class="note-title">✅ Test de succès</div>
+                                    <p>Connexion RDP réussie</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Catégorie : IPAM -->
+                <div class="category">
+                    <div class="category-header" onclick="toggleCategory(this)">
+                        <h3><i class="fas fa-map"></i> IPAM</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="category-content">
+                        <!-- COMMANDE 1 -->
+                        <div class="command-item">
+                            <div class="command-meta">
+                                <span class="risk-medium">RISQUE MOYEN</span>
+                                <span class="category-tag">GESTION</span>
+                                <span class="time-tag">⏱️ 15 minutes</span>
+                            </div>
+                            
+                            <h3>Déploiement IPAM</h3>
+                            
+                            <pre class="command-code"># Installation IPAM
+Install-WindowsFeature IPAM -IncludeManagementTools
+
+# Installer RSAT GPMC pour GPO
+Add-WindowsCapability -Online -Name Rsat.GroupPolicy.Management.Tools~~~~0.0.1.0
+
+# Provisionnement IPAM via GPO
+Invoke-IpamGpoProvisioning `
+    -Domain "afci.lab" `
+    -GpoPrefixName "IPAM_AFCI" `
+    -IpamServerFqdn "SRV-01.afci.lab"
+
+# Démarrer la découverte
+Start-ScheduledTask -TaskPath "\Microsoft\Windows\IPAM\" -TaskName "ServerDiscovery"</pre>
+                            
+                            <div class="command-notes">
+                                <div class="note note-when">
+                                    <div class="note-title">🎯 Quand utiliser</div>
+                                    <p>Gestion centralisée des adresses IP dans un environnement Windows</p>
+                                </div>
+                                <div class="note note-warning">
+                                    <div class="note-title">⚠️ Attention</div>
+                                    <p>La découverte prend plusieurs heures, patientez avant configuration</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION ADMINISTRATION À DISTANCE -->
+            <section id="remote" class="section">
+                <div class="section-header">
+                    <h2><i class="fas fa-laptop-house"></i> Administration à distance</h2>
+                    <span class="section-tag">Remote Management</span>
+                </div>
+
+                <!-- Catégorie : PowerShell Remoting -->
+                <div class="category">
+                    <div class="category-header" onclick="toggleCategory(this)">
+                        <h3><i class="fas fa-terminal"></i> PowerShell Remoting</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="category-content">
+                        <!-- COMMANDE 1 -->
+                        <div class="command-item">
+                            <div class="command-meta">
+                                <span class="risk-medium">RISQUE MOYEN</span>
+                                <span class="category-tag">REMOTE</span>
+                                <span class="time-tag">⏱️ 5 minutes</span>
+                            </div>
+                            
+                            <h3>Configurer PowerShell Remoting</h3>
+                            
+                            <pre class="command-code"># Activer PowerShell Remoting
+Enable-PSRemoting -Force
+
+# Autoriser un hôte comme TrustedHost
+Set-Item WSMan:\localhost\Client\TrustedHosts -Value "IP_PC_ADMIN" -Force
+
+# Configurer WinRM
+winrm quickconfig
+
+# Tester la connexion à un serveur
+Enter-PSSession -ComputerName "SRV-01" -Credential (Get-Credential)</pre>
+                            
+                            <div class="command-notes">
+                                <div class="note note-when">
+                                    <div class="note-title">🎯 Quand utiliser</div>
+                                    <p>Administration à distance de serveurs</p>
+                                </div>
+                                <div class="note note-warning">
+                                    <div class="note-title">⚠️ Attention</div>
+                                    <p>Sécuriser WinRM avec HTTPS dans les environnements de production</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- COMMANDE 2 -->
+                        <div class="command-item">
+                            <div class="command-meta">
+                                <span class="risk-low">RISQUE FAIBLE</span>
+                                <span class="category-tag">REMOTE</span>
+                                <span class="time-tag">⏱️ 10 secondes</span>
+                            </div>
+                            
+                            <h3>Exécution de commandes à distance</h3>
+                            
+                            <pre class="command-code"># Exécuter une commande sur un serveur distant
+Invoke-Command -ComputerName "SRV-01" -ScriptBlock {
+    Get-Service | Where-Object {$_.Status -eq "Running"}
+}
+
+# Créer un partage à distance
+Invoke-Command -ComputerName "SRV-01" -ScriptBlock {
+    New-Item -Path "C:\Partages\Test" -ItemType Directory -Force
+    New-SmbShare -Name "TestShare" -Path "C:\Partages\Test" -FullAccess "Administrateurs"
+}</pre>
+                            
+                            <div class="command-notes">
+                                <div class="note note-when">
+                                    <div class="note-title">🎯 Quand utiliser</div>
+                                    <p>Administration centralisée de plusieurs serveurs</p>
+                                </div>
+                                <div class="note note-test">
+                                    <div class="note-title">✅ Test de succès</div>
+                                    <p>La commande s'exécute correctement sur l'hôte distant</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Catégorie : Jonction au domaine -->
+                <div class="category">
+                    <div class="category-header" onclick="toggleCategory(this)">
+                        <h3><i class="fas fa-network-wired"></i> Jonction au domaine</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="category-content">
+                        <!-- COMMANDE 1 -->
+                        <div class="command-item">
+                            <div class="command-meta">
+                                <span class="risk-medium">RISQUE MOYEN</span>
+                                <span class="category-tag">DOMAINE</span>
+                                <span class="time-tag">⏱️ 2 minutes</span>
+                            </div>
+                            
+                            <h3>Joindre un ordinateur au domaine</h3>
+                            
+                            <pre class="command-code"># Joindre un ordinateur au domaine
+Add-Computer -DomainName "afci.lab" `
+    -Credential (Get-Credential -UserName "AFCI\Administrator") `
+    -Restart
+
+# Vérifier l'appartenance au domaine
+(Get-CimInstance Win32_ComputerSystem).Domain
+
+# Renommer et joindre au domaine
+Rename-Computer -NewName "PC_Admin" -Force -Restart:$false
+Add-Computer -DomainName "afci.lab" -Credential $Creds -Restart</pre>
+                            
+                            <div class="command-notes">
+                                <div class="note note-when">
+                                    <div class="note-title">🎯 Quand utiliser</div>
+                                    <p>Intégration de nouveaux postes dans le domaine</p>
+                                </div>
+                                <div class="note note-warning">
+                                    <div class="note-title">⚠️ Attention</div>
+                                    <p>Redémarrage requis pour que la jonction soit effective</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION UTILITAIRES -->
+            <section id="utils" class="section">
+                <div class="section-header">
+                    <h2><i class="fas fa-tools"></i> Utilitaires</h2>
+                    <span class="section-tag">Outils</span>
+                </div>
+
+                <!-- Catégorie : Commandes Utiles -->
+                <div class="category">
+                    <div class="category-header" onclick="toggleCategory(this)">
+                        <h3><i class="fas fa-terminal"></i> Commandes Utiles</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="category-content">
+                        <!-- COMMANDE 1 -->
+                        <div class="command-item">
+                            <div class="command-meta">
+                                <span class="risk-low">RISQUE FAIBLE</span>
+                                <span class="category-tag">DIAGNOSTIC</span>
+                                <span class="time-tag">⏱️ 10 secondes</span>
+                            </div>
+                            
+                            <h3>Commandes réseau utiles</h3>
+                            
+                            <pre class="command-code"># Tester la connectivité
+Test-NetConnection -ComputerName "[HOTE]" -TraceRoute
+
+# Vérifier les ports ouverts
+Test-NetConnection -ComputerName "[HOTE]" -Port [PORT]
+
+# Faire un ping continu
+Test-Connection -ComputerName "[HOTE]" -Count 10
+
+# Résoudre un nom DNS
+Resolve-DnsName -Name "[NOM_DOMAINE]"</pre>
+                            
+                            <div class="command-notes">
+                                <div class="note note-when">
+                                    <div class="note-title">🎯 Quand utiliser</div>
+                                    <p>Diagnostic de problèmes réseau</p>
+                                </div>
+                                <div class="note note-warning">
+                                    <div class="note-title">⚠️ Attention</div>
+                                    <p>Certains hôtes peuvent bloquer ICMP ou les scans de port</p>
+                                </div>
+                                <div class="note note-test">
+                                    <div class="note-title">✅ Test de succès</div>
+                                    <p>Connectivité établie ou problème identifié</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- COMMANDE 2 -->
+                        <div class="command-item">
+                            <div class="command-meta">
+                                <span class="risk-low">RISQUE FAIBLE</span>
+                                <span class="category-tag">SYSTÈME</span>
+                                <span class="time-tag">⏱️ 5 secondes</span>
+                            </div>
+                            
+                            <h3>Journal des événements</h3>
+                            
+                            <pre class="command-code"># Voir les événements RRAS
+Get-EventLog -LogName System -Source RemoteAccess -Newest 20
+
+# Vérifier l'état du NAT
+Get-NetNatStaticMapping
+Get-NetNatSession
+
+# Vérifier les services
+Get-Service RemoteAccess | Select-Object Name, Status</pre>
+                            
+                            <div class="command-notes">
+                                <div class="note note-when">
+                                    <div class="note-title">🎯 Quand utiliser</div>
+                                    <p>Dépannage de services, investigation d'erreurs</p>
+                                </div>
+                                <div class="note note-test">
+                                    <div class="note-title">✅ Test de succès</div>
+                                    <p>Identification de la cause d'un problème</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- COMMANDE 3 -->
+                        <div class="command-item">
+                            <div class="command-meta">
+                                <span class="risk-low">RISQUE FAIBLE</span>
+                                <span class="category-tag">SYSTÈME</span>
+                                <span class="time-tag">⏱️ 5 secondes</span>
+                            </div>
+                            
+                            <h3>Gestion de l'exécution PowerShell</h3>
+                            
+                            <pre class="command-code"># Modifier la politique d'exécution
+Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force
+
+# Vérifier la politique actuelle
+Get-ExecutionPolicy -List
+
+# Vérifier la langue disponible
+Get-WinUserLanguageList
+
+# Changer la langue d'affichage
+Set-WinUILanguageOverride -Language en-US</pre>
+                            
+                            <div class="command-notes">
+                                <div class="note note-when">
+                                    <div class="note-title">🎯 Quand utiliser</div>
+                                    <p>Exécution de scripts, configuration système</p>
+                                </div>
+                                <div class="note note-warning">
+                                    <div class="note-title">⚠️ Attention</div>
+                                    <p>Bypass peut être dangereux pour la sécurité</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION SCRIPTS COMPLETS -->
+            <section id="scripts" class="section">
+                <div class="section-header">
+                    <h2><i class="fas fa-code"></i> Scripts Complets</h2>
+                    <span class="section-tag">Automatisation</span>
+                </div>
+
+                <!-- Catégorie : Scripts de Configuration -->
+                <div class="category">
+                    <div class="category-header" onclick="toggleCategory(this)">
+                        <h3><i class="fas fa-cogs"></i> Scripts de Configuration</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="category-content">
+                        <!-- SCRIPT 1 : Configuration RRAS -->
+                        <div class="command-item">
+                            <div class="command-meta">
+                                <span class="risk-high">RISQUE ÉLEVÉ</span>
+                                <span class="category-tag">ROUTAGE</span>
+                                <span class="time-tag">⏱️ 5 minutes</span>
+                            </div>
+                            
+                            <h3>Script complet : Configuration RRAS avec NAT</h3>
+                            
+                            <pre class="command-code"># Script complet de configuration RRAS avec NAT
+# ============================================
+
+# 1. Installer les rôles nécessaires
+Install-WindowsFeature RemoteAccess, Routing -IncludeManagementTools
+Restart-Computer -Force
+
+# 2. Activer le service RRAS
+Install-RemoteAccess -VpnType RoutingOnly
+
+# 3. Démarrer et configurer le service
+Set-Service RemoteAccess -StartupType Automatic
+Start-Service RemoteAccess
+
+# 4. Configurer les interfaces (exemple pour RT1)
+# Interface WAN (vers Internet)
+New-NetIPAddress -InterfaceIndex 1 -IPAddress 172.16.2.141 -PrefixLength 28 -DefaultGateway 172.16.2.142
+
+# Interface LAN (utilisateurs)
+New-NetIPAddress -InterfaceIndex 2 -IPAddress 172.16.1.254 -PrefixLength 24
+
+# Interface Serveurs
+New-NetIPAddress -InterfaceIndex 5 -IPAddress 172.16.2.62 -PrefixLength 26
+
+# 5. Configurer les routes statiques
+New-NetRoute -DestinationPrefix "172.16.0.0/24" -NextHop "172.16.2.140" -InterfaceIndex 2
+New-NetRoute -DestinationPrefix "172.16.2.0/26" -NextHop "172.16.2.140" -InterfaceIndex 2
+
+# 6. Activer le forwarding IP
+Set-NetIPInterface -InterfaceAlias "Ethernet" -Forwarding Enabled
+Set-NetIPInterface -InterfaceAlias "Ethernet 2" -Forwarding Enabled
+
+# 7. Configurer DHCP Relay (optionnel)
+netsh routing ip relay install
+netsh routing ip relay add dhcpserver 172.16.2.1
+
+# 8. Activer les règles de pare-feu nécessaires
+Enable-NetFirewallRule -DisplayGroup "File and Printer Sharing"
+Enable-NetFirewallRule -DisplayGroup "Remote Service Management"
+
+Write-Host "Configuration RRAS terminée avec succès!" -ForegroundColor Green</pre>
+                            
+                            <div class="command-notes">
+                                <div class="note note-when">
+                                    <div class="note-title">🎯 Quand utiliser</div>
+                                    <p>Configuration complète d'un serveur comme routeur avec NAT</p>
+                                </div>
+                                <div class="note note-warning">
+                                    <div class="note-title">⚠️ Attention</div>
+                                    <p>Adapter les adresses IP et interfaces selon votre topologie</p>
+                                </div>
+                                <div class="note note-test">
+                                    <div class="note-title">✅ Test de succès</div>
+                                    <p>Le trafic passe entre les réseaux et NAT fonctionne</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SCRIPT 2 : Promotion DC répliqué -->
+                        <div class="command-item">
+                            <div class="command-meta">
+                                <span class="risk-high">RISQUE ÉLEVÉ</span>
+                                <span class="category-tag">ACTIVE DIRECTORY</span>
+                                <span class="time-tag">⏱️ 10-30 minutes</span>
+                            </div>
+                            
+                            <h3>Script complet : Promotion en DC répliqué</h3>
+                            
+                            <pre class="command-code"># Script complet pour promouvoir SRV-03 en DC répliqué
+# ======================================================
+
+# Variables de configuration
+$ServerName = "SRV-03"
+$DomainName = "afci.lab"
+$DomainNetbios = "AFCI"
+$ServerIP = "172.16.2.65"
+$ServerGateway = "172.16.2.126"
+$PrimaryDNS = "172.16.2.1"
+$SecondaryDNS = "8.8.8.8"
+
+# 1. Configuration réseau
+$Adapter = Get-NetAdapter -Physical | Where-Object {$_.Status -eq 'Up'} | Select-Object -First 1
+Set-NetIPInterface -InterfaceIndex $Adapter.InterfaceIndex -Dhcp Disabled
+New-NetIPAddress -InterfaceIndex $Adapter.InterfaceIndex `
+    -IPAddress $ServerIP `
+    -PrefixLength 26 `
+    -DefaultGateway $ServerGateway
+Set-DnsClientServerAddress -InterfaceIndex $Adapter.InterfaceIndex `
+    -ServerAddresses @($PrimaryDNS, $SecondaryDNS)
+
+# 2. Renommage du serveur
+Rename-Computer -NewName $ServerName -Force -Restart:$false
+
+# 3. Jonction au domaine (si nécessaire)
+$CurrentDomain = (Get-CimInstance Win32_ComputerSystem).Domain
+if ($CurrentDomain -ne $DomainName) {
+    $Creds = Get-Credential -UserName "$DomainNetbios\Administrator"
+    Add-Computer -DomainName $DomainName -Credential $Creds -Force -Restart
+    exit 0
+}
+
+# 4. Installation des rôles AD
+Install-WindowsFeature AD-Domain-Services, DNS -IncludeManagementTools
+
+# 5. Découverte du DC existant
+$SourceDC_FQDN = (Resolve-DnsName -Name $PrimaryDNS -Type PTR).NameHost
+if ([string]::IsNullOrEmpty($SourceDC_FQDN)) {
+    $SourceDC_FQDN = "SRV-01.$DomainName"
+}
+
+# 6. Promotion en DC répliqué
+$SafeModePwd = Read-Host -AsSecureString -Prompt "Mot de passe SAFE MODE"
+$PromotionCreds = Get-Credential -UserName "$DomainNetbios\Administrator"
+
+Install-ADDSDomainController `
+    -DomainName $DomainName `
+    -SafeModeAdministratorPassword $SafeModePwd `
+    -Credential $PromotionCreds `
+    -InstallDns `
+    -NoGlobalCatalog:$false `
+    -SiteName "Default-First-Site-Name" `
+    -ReplicationSourceDC $SourceDC_FQDN `
+    -CreateDnsDelegation:$false `
+    -NoRebootOnCompletion:$false `
+    -Force
+
+Write-Host "Promotion réussie! Redémarrage en cours..." -ForegroundColor Green</pre>
+                            
+                            <div class="command-notes">
+                                <div class="note note-when">
+                                    <div class="note-title">🎯 Quand utiliser</div>
+                                    <p>Ajout d'un contrôleur de domaine répliqué dans un domaine existant</p>
+                                </div>
+                                <div class="note note-warning">
+                                    <div class="note-title">⚠️ Attention</div>
+                                    <p>Opération irréversible, nécessite un redémarrage</p>
+                                </div>
+                                <div class="note note-test">
+                                    <div class="note-title">✅ Test de succès</div>
+                                    <p>`repadmin /replsummary` montre une réplication saine</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SCRIPT 3 : Configuration DHCP Failover -->
+                        <div class="command-item">
+                            <div class="command-meta">
+                                <span class="risk-medium">RISQUE MOYEN</span>
+                                <span class="category-tag">DHCP</span>
+                                <span class="time-tag">⏱️ 5 minutes</span>
+                            </div>
+                            
+                            <h3>Script complet : Configuration DHCP Failover</h3>
+                            
+                            <pre class="command-code"># Script de configuration DHCP Failover entre SRV-01 et SRV-03
+# =============================================================
+
+# 1. Installer le rôle DHCP sur SRV-03 (si nécessaire)
+Install-WindowsFeature -Name DHCP -IncludeManagementTools
+
+# 2. Autoriser le service dans le pare-feu
+netsh advfirewall firewall add rule name="DHCP Server" dir=in action=allow protocol=UDP localport=67,68
+
+# 3. Redémarrer le service
+Restart-Service DHCPServer -Force
+Set-Service -Name DHCPServer -StartupType Automatic
+
+# 4. Configuration du failover pour le scope Lille
+Add-DhcpServerv4Failover `
+    -Name "Failover-Lille-Scope" `
+    -ScopeId 172.16.0.0 `
+    -PartnerServer "SRV-03.afci.lab" `
+    -ComputerName "SRV-01.afci.lab" `
+    -LoadBalancePercent 50 `
+    -MaxClientLeadTime 01:00:00
+
+# 5. Configuration du failover pour le scope Arras
+Add-DhcpServerv4Failover `
+    -Name "Failover-Arras-Scope" `
+    -ScopeId 172.16.1.0 `
+    -PartnerServer "SRV-03.afci.lab" `
+    -ComputerName "SRV-01.afci.lab" `
+    -LoadBalancePercent 50 `
+    -MaxClientLeadTime 01:00:00
+
+# 6. Vérification des scopes
+Write-Host "=== Scopes sur SRV-01 ===" -ForegroundColor Cyan
+Get-DhcpServerv4Scope -ComputerName "SRV-01.afci.lab" | Format-Table ScopeId, Name, State
+
+Write-Host "`n=== Scopes sur SRV-03 ===" -ForegroundColor Cyan
+Get-DhcpServerv4Scope -ComputerName "SRV-03.afci.lab" | Format-Table ScopeId, Name, State
+
+Write-Host "`n=== État du failover ===" -ForegroundColor Cyan
+Get-DhcpServerv4Failover -ComputerName "SRV-01.afci.lab" | Format-Table Name, PartnerServer, Mode
+
+Write-Host "`nConfiguration DHCP Failover terminée avec succès!" -ForegroundColor Green</pre>
+                            
+                            <div class="command-notes">
+                                <div class="note note-when">
+                                    <div class="note-title">🎯 Quand utiliser</div>
+                                    <p>Mise en place de haute disponibilité pour le service DHCP</p>
+                                </div>
+                                <div class="note note-warning">
+                                    <div class="note-title">⚠️ Attention</div>
+                                    <p>Les deux serveurs doivent être dans le même domaine</p>
+                                </div>
+                                <div class="note note-test">
+                                    <div class="note-title">✅ Test de succès</div>
+                                    <p>Les clients reçoivent des adresses même si un serveur DHCP est down</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SCRIPT 4 : Configuration IPAM -->
+                        <div class="command-item">
+                            <div class="command-meta">
+                                <span class="risk-medium">RISQUE MOYEN</span>
+                                <span class="category-tag">GESTION</span>
+                                <span class="time-tag">⏱️ 15 minutes</span>
+                            </div>
+                            
+                            <h3>Script complet : Déploiement IPAM</h3>
+                            
+                            <pre class="command-code"># Script de déploiement IPAM en mode production (GPO)
+# ====================================================
+
+# 1. Installation IPAM
+Install-WindowsFeature IPAM -IncludeManagementTools
+Restart-Computer
+
+# 2. Installer RSAT GPMC pour GPO
+Add-WindowsCapability -Online -Name Rsat.GroupPolicy.Management.Tools~~~~0.0.1.0
+Add-WindowsCapability -Online -Name Rsat.ActiveDirectory.DS-LDS.Tools~~~~0.0.1.0
+
+# 3. Importer les modules
+Import-Module GroupPolicy
+Import-Module ActiveDirectory
+Import-Module IpamServer
+
+# 4. Provisionnement IPAM via GPO
+Invoke-IpamGpoProvisioning `
+    -Domain "afci.lab" `
+    -GpoPrefixName "IPAM_AFCI" `
+    -IpamServerFqdn "SRV-01.afci.lab"
+
+# 5. Démarrer la découverte
+Start-ScheduledTask -TaskPath "\Microsoft\Windows\IPAM\" -TaskName "ServerDiscovery"
+
+# 6. Attendre la découverte (2-4 heures)
+Write-Host "Découverte en cours (2 à 4 heures)..." -ForegroundColor Yellow
+Write-Host "Les serveurs DC/DHCP/DNS seront découverts automatiquement" -ForegroundColor White
+
+# 7. Vérifier l'état de découverte (après attente)
+Write-Host "`n=== État des serveurs découverts ===" -ForegroundColor Cyan
+Get-IpamServerInventory | Format-Table ServerFqdn, ServiceType, ManageabilityStatus
+
+# 8. Configuration de la structure réseau (post-découverte)
+Add-IpamBlock -NetworkId "172.16.0.0/16" -Description "Infrastructure AFCI" -Owner "IT-AFCI"
+
+Add-IpamSubnet -NetworkId "172.16.0.0/24" -SubnetName "Lille-Users" -Site "Lille" -Description "Utilisateurs Lille"
+Add-IpamSubnet -NetworkId "172.16.1.0/24" -SubnetName "Arras-Users" -Site "Arras" -Description "Utilisateurs Arras"
+Add-IpamSubnet -NetworkId "172.16.2.0/26" -SubnetName "Infra-Serveurs" -Description "Réseau Serveurs-Lille"
+Add-IpamSubnet -NetworkId "172.16.2.64/26" -SubnetName "Infra-Serveurs" -Description "Réseau Serveurs-Arras"
+Add-IpamSubnet -NetworkId "172.16.2.128/28" -SubnetName "Infra-Serveurs" -Description "Réseau interconnexion"
+
+Write-Host "`nIPAM déployé avec succès!" -ForegroundColor Green</pre>
+                            
+                            <div class="command-notes">
+                                <div class="note note-when">
+                                    <div class="note-title">🎯 Quand utiliser</div>
+                                    <p>Gestion centralisée des adresses IP dans un environnement Windows</p>
+                                </div>
+                                <div class="note note-warning">
+                                    <div class="note-title">⚠️ Attention</div>
+                                    <p>La découverte prend plusieurs heures, patientez avant configuration</p>
+                                </div>
+                                <div class="note note-test">
+                                    <div class="note-title">✅ Test de succès</div>
+                                    <p>Les serveurs apparaissent dans la console IPAM</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SCRIPT 5 : Configuration Windows LAPS -->
+                        <div class="command-item">
+                            <div class="command-meta">
+                                <span class="risk-high">RISQUE ÉLEVÉ</span>
+                                <span class="category-tag">SÉCURITÉ</span>
+                                <span class="time-tag">⏱️ 15 minutes</span>
+                            </div>
+                            
+                            <h3>Script complet : Déploiement Windows LAPS</h3>
+                            
+                            <pre class="command-code"># Script de déploiement Windows LAPS
+# Domaine : afci.lab
+# OU cible : OU=Ordinateurs,DC=afci,DC=lab
+# =============================================
+
+# 1. Installer le module LAPS
+Get-WindowsCapability -Name RSAT*LAPS* -Online
+Add-WindowsCapability -Online -Name Rsat.Laps.Tools~~~~0.0.1.0
+
+Import-Module LAPS
+Import-Module GroupPolicy
+
+# Variables
+$DomainOU        = "OU=Ordinateurs,DC=afci,DC=lab"
+$GPOName         = "GPO-SEC-Windows-LAPS-Ordinateurs"
+$LAPSRegistryKey = "HKLM\Software\Microsoft\Policies\LAPS"
+$LAPSReaders     = "GG_IT_Admin"
+
+# 2. Mise à jour du schéma Active Directory (1 seule fois)
+Update-LapsADSchema
+
+# 3. Autoriser les ordinateurs à écrire leur mot de passe
+Set-LapsADComputerSelfPermission -Identity $DomainOU
+
+# 4. Délégation de lecture des mots de passe LAPS
+Set-LapsADReadPasswordPermission `
+    -Identity $DomainOU `
+    -AllowedPrincipals $LAPSReaders
+
+# 5. Création de la GPO LAPS
+if (-not (Get-GPO -Name $GPOName -ErrorAction SilentlyContinue)) {
+    New-GPO -Name $GPOName -Comment "Gestion automatique des mots de passe admin locaux via Windows LAPS"
+}
+
+# 6. Lier la GPO à l'OU Ordinateurs
+New-GPLink `
+    -Name $GPOName `
+    -Target $DomainOU `
+    -LinkEnabled Yes
+
+# 7. Configuration LAPS via registre
+Set-GPRegistryValue -GpoName $GPOName -Key $LAPSRegistryKey `
+    -ValueName "BackupDirectory" -Type DWord -Value 1
+
+Set-GPRegistryValue -GpoName $GPOName -Key $LAPSRegistryKey `
+    -ValueName "PasswordAgeDays" -Type DWord -Value 30
+
+Set-GPRegistryValue -GpoName $GPOName -Key $LAPSRegistryKey `
+    -ValueName "PasswordLength" -Type DWord -Value 14
+
+Set-GPRegistryValue -GpoName $GPOName -Key $LAPSRegistryKey `
+    -ValueName "PasswordComplexity" -Type DWord -Value 4
+
+Set-GPRegistryValue -GpoName $GPOName -Key $LAPSRegistryKey `
+    -ValueName "AdminAccountName" -Type String -Value "Administrator"
+
+Set-GPRegistryValue -GpoName $GPOName -Key $LAPSRegistryKey `
+    -ValueName "EnablePasswordEncryption" -Type DWord -Value 1
+
+Write-Host "=== Déploiement Windows LAPS terminé avec succès ===" -ForegroundColor Green</pre>
+                            
+                            <div class="command-notes">
+                                <div class="note note-when">
+                                    <div class="note-title">🎯 Quand utiliser</div>
+                                    <p>Sécurisation des mots de passe administrateur locaux</p>
+                                </div>
+                                <div class="note note-warning">
+                                    <div class="note-title">⚠️ Attention</div>
+                                    <p>Nécessite des droits d'administrateur d'entreprise</p>
+                                </div>
+                                <div class="note note-test">
+                                    <div class="note-title">✅ Test de succès</div>
+                                    <p>Les mots de passe administrateur sont automatiquement gérés</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FOOTER -->
+            <footer class="footer">
+                <p>Base de connaissances Windows Complète Maintenu par l'équipe d'administration système</p>
+                <p style="margin-top: 10px; font-size: 0.9rem;">
+                    Dernière mise à jour : <span id="currentDate"></span> • Contient toutes les commandes des fichiers TP
+                </p>
+            </footer>
+        </main>
+    </div>
+
+    <script>
+        // Date actuelle
+        document.getElementById('currentDate').textContent = new Date().toLocaleDateString('fr-FR', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+
+        // Fonction de pliage/dépliage
+        function toggleCategory(header) {
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('i.fa-chevron-down');
+            
+            content.classList.toggle('collapsed');
+            icon.classList.toggle('rotated');
+        }
+
+        // Tout déplier
+        document.getElementById('expandAllBtn').addEventListener('click', function() {
+            document.querySelectorAll('.category-content').forEach(content => {
+                content.classList.remove('collapsed');
+            });
+            document.querySelectorAll('.category-header i.fa-chevron-down').forEach(icon => {
+                icon.classList.add('rotated');
+            });
+        });
+
+        // Tout replier
+        document.getElementById('collapseAllBtn').addEventListener('click', function() {
+            document.querySelectorAll('.category-content').forEach(content => {
+                content.classList.add('collapsed');
+            });
+            document.querySelectorAll('.category-header i.fa-chevron-down').forEach(icon => {
+                icon.classList.remove('rotated');
+            });
+        });
+
+        // Recherche
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const commands = document.querySelectorAll('.command-item');
+            
+            commands.forEach(cmd => {
+                const text = cmd.textContent.toLowerCase();
+                if (text.includes(searchTerm)) {
+                    cmd.style.display = 'block';
+                    // Déplier la catégorie parente
+                    const category = cmd.closest('.category');
+                    const categoryContent = category.querySelector('.category-content');
+                    const categoryIcon = category.querySelector('.category-header i.fa-chevron-down');
+                    
+                    if (categoryContent.classList.contains('collapsed')) {
+                        categoryContent.classList.remove('collapsed');
+                        categoryIcon.classList.add('rotated');
+                    }
+                    
+                    category.style.display = 'block';
+                } else {
+                    cmd.style.display = 'none';
+                }
+            });
+            
+            // Cacher les catégories vides
+            document.querySelectorAll('.category').forEach(category => {
+                const visibleCommands = category.querySelectorAll('.command-item[style="display: block"]');
+                if (visibleCommands.length === 0) {
+                    category.style.display = 'none';
+                } else {
+                    category.style.display = 'block';
+                }
+            });
+        });
+
+        // Navigation
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Mettre à jour l'actif
+                document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Scroll
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 20,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
