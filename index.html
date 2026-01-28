@@ -5992,7 +5992,27 @@ aichat --rag <RAG>                      # Démarrer un RAG
 
   </div>
 
+  <!-- Lien Annexe Commandes Windows > -->
+<a href="windows-annexe-complete.html" 
+   class="floating-button"
+   style="position: fixed; bottom: 30px; right: 30px; background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); text-decoration: none; z-index: 1000;">
+    <i class="fab fa-windows"></i>
+    <span class="tooltip" style="position: absolute; right: 70px; background: #2c3e50; color: white; padding: 8px 12px; border-radius: 4px; white-space: nowrap; font-size: 14px; opacity: 0; transition: opacity 0.3s; pointer-events: none;">
+        Annexe Windows
+    </span>
+</a>
+
 <script>
+
+  <script>
+    // Script pour le tooltip du bouton flottant
+    document.querySelector('.floating-button').addEventListener('mouseenter', function() {
+        this.querySelector('.tooltip').style.opacity = '1';
+    });
+    document.querySelector('.floating-button').addEventListener('mouseleave', function() {
+        this.querySelector('.tooltip').style.opacity = '0';
+    });
+</script>
     // =============================================
     // FONCTIONS DE BASE
     // =============================================
@@ -6355,4 +6375,5 @@ aichat --rag <RAG>                      # Démarrer un RAG
     }
 </script>
 </body>
+
 </html>
